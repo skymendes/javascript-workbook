@@ -1,13 +1,13 @@
 'use strict';
 
-//input a word
+// input a word
 // check if a letter is a vowel using a for loop
 // store index of first vowel
 // removing everything in the indexes < the vowel
 // append removed string to the end of the string
 // additionally append 'ay' to the end of the string
 // edge cases*
-// words with no vowel just gets 'ay' appended
+// words with no vowel just gets 'yay' appended
 
 const assert = require('assert');
 const readline = require('readline');
@@ -22,7 +22,7 @@ function pigLatin(word) {
   const vowel = ['a', 'e', 'i', 'o', 'u', 'y'];
   let storeIndex = 0;
 
-  // passed test in 29ms
+  // passed test in 24ms
   
   // for (let i=0; i<word.length; i++) {
   //   for (let j=0; j<vowel.length; j++) {
