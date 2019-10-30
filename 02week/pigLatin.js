@@ -38,6 +38,8 @@ function pigLatin(word) {
   //   }
   // }
 
+  // passed in 23ms 
+  
   for (let i = 0; i < word.length; i++) {
     if (vowel.includes(word[i])) {
       if (i === 0) {
