@@ -22,21 +22,21 @@ function pigLatin(word) {
   const vowel = ['a', 'e', 'i', 'o', 'u', 'y'];
   let storeIndex = 0;
 
-  passed test in 24ms
+  // passed test in 24ms
   
-  for (let i=0; i<word.length; i++) {
-    for (let j=0; j<vowel.length; j++) {
-      if( word[i] === vowel[j]){
-        storeIndex = i;
-        const str1 = word.slice(0,storeIndex);
-        const str2 = word.slice(storeIndex);
-        if(storeIndex === 0){
-          return str2 + str1 + 'yay';
-        }
-        return str2 + str1 + 'ay';
-      }
-    }
-  }
+  // for (let i=0; i<word.length; i++) {
+  //   for (let j=0; j<vowel.length; j++) {
+  //     if( word[i] === vowel[j]){
+  //       storeIndex = i;
+  //       const str1 = word.slice(0,storeIndex);
+  //       const str2 = word.slice(storeIndex);
+  //       if(storeIndex === 0){
+  //         return str2 + str1 + 'yay';
+  //       }
+  //       return str2 + str1 + 'ay';
+  //     }
+  //   }
+  // }
 
   for (let i = 0; i < word.length; i++) {
     if (vowel.includes(word[i])) {
