@@ -1,0 +1,76 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="title">Pig Latin Translator</div>
+        <input id="textBox" placeholder="Type any word">
+        <!-- <script src="../02week/pigLatin.js"></script> -->
+        <br>
+        <button id="button">TRANSLATE</button>
+        <div id="pigLatin"></div>
+    </div>
+
+    <script>
+
+
+        document.getElementById('button').addEventListener('click', fn1);
+
+        function fn1() {
+            let str = document.getElementById('textBox').value;
+            document.getElementById('pigLatin').innerText = (pigLatin(str));
+        }
+
+
+
+        function pigLatin(word) {
+
+            const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+            word = word.toLowerCase().trim();
+            let firstVowel = 0;
+
+            for (let i = 0; i < word.length; i++) {
+                for (let j = 0; j < vowels.length; j++) {
+                    if (word[i] === vowels[j]) {
+                        firstVowel = i;
+                        const firstString = word.slice(0, firstVowel);
+                        const secondString = word.slice(firstVowel);
+                        if (firstVowel === 0) {
+                            return secondString + firstString + 'yay';
+                        }
+                        return secondString + firstString + 'ay';
+                    }
+                }
+            }
+        }
+
+        function pigLatin(word) {
+            word = word.toLowerCase().trim();
+            
+            let firstPosition = findFirstVowelPosition(word);
+            if (firstPosition > 0) {
+                return word.slice(firstPosition) + word.slice(0, firstPosition) + 'ay';
+            } else {
+                return word + 'yay';
+            }
+        }
+        function findFirstVowelPosition(word) {
+            for (let i = 0; i < word.length; i++) {
+                if ('aeiouy'.indexOf(word[i]) !== -1) {
+                    return i;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
