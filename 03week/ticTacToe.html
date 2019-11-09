@@ -21,19 +21,19 @@
 <body>
     <table>
         <tr>
-            <td data-row="0" data-col="0" class="board-square">-</td>
-            <td data-row="0" data-col="1" class="board-square">-</td>
-            <td data-row="0" data-col="2" class="board-square">-</td>
+            <td data-row="0" data-col="0" class="board-square"></td>
+            <td data-row="0" data-col="1" class="board-square"></td>
+            <td data-row="0" data-col="2" class="board-square"></td>
         </tr>
         <tr>
-            <td data-row="1" data-col="0" class="board-square">-</td>
-            <td data-row="1" data-col="1" class="board-square">-</td>
-            <td data-row="1" data-col="2" class="board-square">-</td>
+            <td data-row="1" data-col="0" class="board-square"></td>
+            <td data-row="1" data-col="1" class="board-square"></td>
+            <td data-row="1" data-col="2" class="board-square"></td>
         </tr>
         <tr>
-            <td data-row="2" data-col="0" class="board-square">-</td>
-            <td data-row="2" data-col="1" class="board-square">-</td>
-            <td data-row="2" data-col="2" class="board-square">-</td>
+            <td data-row="2" data-col="0" class="board-square"></td>
+            <td data-row="2" data-col="1" class="board-square"></td>
+            <td data-row="2" data-col="2" class="board-square"></td>
         </tr>
         </tr>
     </table>
@@ -43,63 +43,55 @@
 <script>
     const squares = document.querySelectorAll('.board-square');
     let playerTurn = 'X';
-    function ticTacToe(row, column) {
-        // Your code here
-        //manipulate the boardnarray (place an x or o) based on the user input (row, column)
-        //manipulate the player turn variable and switch from either X to O or O to X
-        let selectedRow = board[row];
-        selectedRow[column] = playerTurn;
-        console.log(playerTurn);
+    // function ticTacToe(row, column) {
+    //     // Your code here
+    //     //manipulate the boardnarray (place an x or o) based on the user input (row, column)
+    //     //manipulate the player turn variable and switch from either X to O or O to X
+
+    function changePlayer() {
         if (playerTurn === "X") {
             playerTurn = "O";
-        } else if (playerTurn === "O") {
+        } else {
             playerTurn = "X";
         }
-        console.log(playerTurn);
     }
 
-    function ticTacToe(row, column) {
-        // Your code here
-        if (validate(row, column)) {
-            if (emptySpace(row, column)) {
-                board[row][column] = playerTurn;
-                switchPlayer();
-            } else {
-                console.log("game over")
+
+    
+        //check empty space
+        function emptySpace(row, column) {
+            if (board[row][column] === ' ') {
+                return true;
             }
+            return false;
         }
-    }
-
-
     //validate input
-    function validate(row, column) {
-        if ((row == 0) || (row == 1) || (row == 2)) {
-            if ((column == 0) || (column == 1) || (column == 2)) {
-                return true
-            } else {
-                console.log("invalid move")
+    function isValidMove(row, column) {
+        const validMoves = ["0", "1", "2"];
+        if (
+            validMoves.includes(row) &&
+            validMoves.includes(column) &&
+            board[row][column] === ' '
+            ) {
+                return true;
             }
-        }
+            console.log("row", row, column, board[row][column])
+        return false;
     }
-    //check empty space
-    function emptySpace(row, column) {
-        if (board[row][column] === ' ') {
-            return true
-        }
-    }
+
+
 
 
     squares.forEach(function (item) {
         item.addEventListener("click", handleClick);
     });
     function handleClick(event) {
-        console.log({ target: event.target });
+        // console.log({ target: event.target });
         let square = event.target;
-        square.textContent = playerTurn;
+        // square.textContent = playerTurn;
         let squareCol = square.dataset.col;
         let squareRow = square.dataset.row;
-        console.log(squareCol, squareRow);
-        ticTacToe(squareCol, squareRow);
+        ticTacToe(squareRow, squareCol, square);
     }
     let board = [
         [' ', ' ', ' '],
@@ -179,7 +171,6 @@
         }
     }
     function checkForWin() {
-        // Your code here
         //call horizontal, vertical, and diagonal wins
         //return true if any of those checks return true
         if (horizontalWin() || verticalWin() || diagonalWin()) {
@@ -187,16 +178,36 @@
         }
         return false
     }
-    function getPrompt() {
-        printBoard();
-        console.log("It's Player " + playerTurn + "'s turn.");
-        rl.question('row: ', (row) => {
-            rl.question('column: ', (column) => {
-                ticTacToe(row, column);
-                getPrompt();
-            });
-        });
+
+
+    function ticTacToe(row, column, square) {
+        if (isValidMove(row, column)) {
+            board[row][column] = playerTurn;
+            square.textContent = playerTurn;
+
+        } else {
+            console.log("Invalid move, try again.");
+            changePlayer();
+        }
+        if (checkForWin()) {
+            alert("Player " + playerTurn + " wins!");
+        } else {
+            changePlayer();
+        }
     }
+
+
+
+    // function getPrompt() {
+    //     printBoard();
+    //     console.log("It's Player " + playerTurn + "'s turn.");
+    //     rl.question('row: ', (row) => {
+    //         rl.question('column: ', (column) => {
+    //             ticTacToe(row, column);
+    //             getPrompt();
+    //         });
+    //     });
+    // }
 </script>
 
 </html>
