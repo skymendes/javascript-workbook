@@ -71,7 +71,7 @@
         if (
             validMoves.includes(row) &&
             validMoves.includes(column) &&
-            board[row][column] === ' '
+            emptySpace(row, column)
             ) {
                 return true;
             }
